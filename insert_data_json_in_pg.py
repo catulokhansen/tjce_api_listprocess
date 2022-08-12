@@ -22,14 +22,14 @@ insert_sql = """INSERT INTO tj_process.tj_process (
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
 # List directory on files jsons
-dir_path = r'tj_api\jsons'
+dir_path = 'jsons'
 res = os.listdir(dir_path)
 
 # Loop to get the json files returned by API and write to the database
 for row in res:
  
  # Variable with the path of the returned json files 
- dir_path = r'tj_api\jsons/' + row
+ dir_path = 'jsons/' + row
 
  # Open the returned jsons files
  with open(dir_path, 'r', encoding='utf-8') as file:

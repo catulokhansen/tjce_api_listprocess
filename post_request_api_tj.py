@@ -4,7 +4,7 @@ from get_token import token
 
 
 # Read number proccess in tj_processos_arquivados
-with open(r'tj_api\numbers_processos.csv','r') as file:
+with open('numbers_processos.csv','r') as file:
     number = csv.reader(file)
     
     # Iterate lines on cvs
@@ -27,9 +27,10 @@ with open(r'tj_api\numbers_processos.csv','r') as file:
 
         # Write API return in json in directory JSONS
         if response.status_code >= 200 and response.status_code <= 299:
-            with open(r"tj_api\jsons/""tj_" + str(row[0]) + ".json", 'w', encoding='utf-8') as result:
+            with open(r"jsons/""tj_" + str(row[0]) + ".json", 'w', encoding='utf-8') as result:
                 data = response.text
                 result.write(data)
+                
        
 
 

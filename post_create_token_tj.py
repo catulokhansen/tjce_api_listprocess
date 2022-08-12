@@ -32,6 +32,7 @@ response_data = response.json()
 token = response_data['token']
 
 # Write the returned token to to file
-with open(r'tj_api\'token.txt', 'w') as file:
+with open('token.txt', 'w') as file:
         file.write(token)
+        
    
