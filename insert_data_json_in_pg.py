@@ -1,9 +1,6 @@
 from genericpath import isfile
 from msilib.schema import tables
-from sqlite3 import Timestamp
-from venv import create
 from datetime import datetime
-import time
 import psycopg2, json, csv, os
 
 # Connect database postresql
