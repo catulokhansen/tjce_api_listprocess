@@ -1,6 +1,9 @@
 from genericpath import isfile
 from msilib.schema import tables
+from sqlite3 import Timestamp
 from venv import create
+from datetime import datetime
+import time
 import psycopg2, json, csv, os
 
 # Connect database postresql
@@ -18,8 +21,9 @@ insert_sql = """INSERT INTO tj_process.tj_process (
             ultima_mov_desc,
             data_ultima_mov,
             ultima_mov_desc_com,
-            situacao         
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            situacao,
+            date_record                    
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
 # List directory on files jsons
 dir_path = 'jsons'
@@ -36,15 +40,16 @@ for row in res:
         
         # Variable to store the sealized json
         read_json = json.load(file)
-        
-        #Loop to iterate over the content in the json and insert the data into the database
+        date_record = datetime.now()
+                      
+        # Loop to iterate over the content in the json and insert the data into the database
         for record in read_json:
           cur.execute(insert_sql, (record['id'], record['numero'], record['numeroFormatado'], record['dataProtocolo'], 
           record['dataPrimeiraDistribuicao'], record['localizacao'], 
           record['ultimaMovimentacao']['descricao'],record['ultimaMovimentacao']['data'], 
-          record['ultimaMovimentacao']['complemento'], record['situacao']))
+          record['ultimaMovimentacao']['complemento'], record['situacao'], date_record))
         con.commit()
-          
+
 
      
         
